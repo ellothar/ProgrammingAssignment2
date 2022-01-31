@@ -1,0 +1,23 @@
+makeCacheMatrix <- function(x = matrix(1:10, byrow = TRUE, nrow = 5)) {
+  invers <- NULL
+  func1 <- function(x) 
+  func2 <- function(y) {
+    x <<- y
+    invers <<- NULL
+  }
+  func1invers <- function() invers
+  func2invers <- function(inverse) {
+    invers <<- inverse
+  }
+  return(list(
+    func2 = func2,
+    func1 = func1,
+    func1inverse = func1invers,
+    func2inverse = func2invers
+  ))
+}
+cacheSolve <- function(x,...) {
+  inverse <- x$getinverse()
+  if (!is.null(inverse)) {
+    return(inverse)
+  }
